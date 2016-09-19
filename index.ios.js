@@ -1,3 +1,9 @@
+/**
+ * Fake class.
+ * isHardwareDetected() should be enough on it's own, which is the reason not everything has been stubbed.
+ * (and if you are actually smart enough to call authenticate() it will just crash...)
+ */
+
 export default class FingerprintAndroid {
     static async cancelAuthentication(): Promise<null> { 
         return null;

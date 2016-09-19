@@ -8,9 +8,9 @@
   "dependencies": {
     "color": "^0.11.3",
     "react": "15.3.1",
-    "react-native": "0.32.1",
+    "react-native": "^0.33.0",
     "react-native-animatable": "^0.6.1",
     "react-native-fingerprint-android": "file:..",
-    "react-native-svg": "^4.3.0"
+    "react-native-svg": "^4.3.1"
   }
 }

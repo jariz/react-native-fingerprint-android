@@ -26,9 +26,13 @@ import { ToastAndroid as Toast } from 'react-native';
         return;
     }
 
-    await Fingerprint.authenticate(warning => {
-        Toast.show(`Try again: ${warning.message}`, Toast.SHORT);
-    });
+    try {
+        await Fingerprint.authenticate(warning => {
+            Toast.show(`Try again: ${warning.message}`, Toast.SHORT);
+        });
+    } catch(error) {
+        Toast.show(`Try again: ${error.message}`, Toast.SHORT);
+    }
 
     Toast.show("Auth successful!", Toast.SHORT);
 })();

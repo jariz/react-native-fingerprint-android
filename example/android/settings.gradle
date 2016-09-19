@@ -1,0 +1,5 @@
+rootProject.name = 'example'
+
+include ':react-native-fingerprint-android', ':react-native-svg', ':app'
+project(':react-native-fingerprint-android').projectDir = new File(rootProject.projectDir, '../..')
+project(':react-native-svg').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-svg/android')

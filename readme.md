@@ -39,7 +39,7 @@ import { ToastAndroid as Toast } from 'react-native';
 
 All functions & constants are static.
 
-###`.authenticate(warningCallback:?(response:FingerprintError) => {}):Promise<null>`  
+####`.authenticate(warningCallback:?(response:FingerprintError) => {}):Promise<null>`  
 Starts authentication flow, with a optional callback for warning messages, instructing your user why authentication failed.  
 Returns a Promise.
 ######Resolving

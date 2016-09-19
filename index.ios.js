@@ -19,6 +19,6 @@ export default class FingerprintAndroid {
     };
 
     static async authenticate(warningCallback:?(response:FingerprintError) => {}):Promise<null> {
-        throw new Error("Believe it or not, but react-nativefingerprint-android actually doesn't support iOS.")
+        throw new Error("Believe it or not, but react-native-fingerprint-android actually doesn't support iOS.")
     }
 }

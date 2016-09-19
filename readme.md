@@ -154,8 +154,8 @@ dependencies {
 
 `android/settings.gradle`
 ```diff
--include ':app'
-+include 'react-native-fingerprint-android', ':app'
+include ':app'
++include 'react-native-fingerprint-android'
 +project(':react-native-fingerprint-android').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fingerprint-android/android')
 ```
 

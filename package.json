@@ -1,6 +1,6 @@
 {
     "name": "react-native-fingerprint-android",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "Simple fingerprint authentication for Android",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,5 +10,19 @@
     },
     "nativePackage": true,
     "author": "Jari Zwarts",
-    "license": "MIT"
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jariz/react-native-fingerprint-android.git"
+    },
+    "keywords": [
+        "Fingerprint",
+        "Authentication",
+        "Biometric",
+        "Access"
+    ],
+    "bugs": {
+        "url": "https://github.com/jariz/react-native-fingerprint-android/issues"
+    },
+    "homepage": "https://github.com/jariz/react-native-fingerprint-android#readme"
 }

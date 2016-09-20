@@ -55,7 +55,7 @@ class example extends Component {
             const permission = await Fingerprint.hasPermission();
             const enrolled = await Fingerprint.hasEnrolledFingerprints();
 
-            if (!hardware | !permission | !enrolled) {
+            if (!hardware || !permission || !enrolled) {
                 let message = !enrolled ? 'No fingerprints registered.' : !hardware ? 'This device doesn\'t support fingerprint scanning.' : 'App has no permission.'
                 this.setState({
                     phase: 'fail',

@@ -17,6 +17,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("MissingPermission")
 public class FingerprintModule extends ReactContextBaseJavaModule {
     FingerprintManager fingerprintManager;
     ReactApplicationContext reactContext;
@@ -126,20 +127,19 @@ public class FingerprintModule extends ReactContextBaseJavaModule {
 
     public class AuthenticationCallback extends FingerprintManager.AuthenticationCallback {
         Promise promise;
-        long a_milli;
 
         public AuthenticationCallback(Promise promise) {
-            a_milli = System.currentTimeMillis();
             this.promise = promise;
-            Log.d("AUTHC", "[" + a_milli + "] init");
         }
 
         @Override
         public void onAuthenticationError(int errorCode, CharSequence errString) {
             super.onAuthenticationError(errorCode, errString);
-            Log.d("AUTHC", "[" + a_milli + "] onAuthenticationError " + errorCode + " " + errString);
             if(errorCode == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
                 isCancelled = true;
+            }
+            if(promise == null) {
+                throw new AssertionError("Tried to reject the auth promise, but it was already resolved / rejected. This shouldn't happen.");
             }
             promise.reject(Integer.toString(errorCode), errString.toString());
             promise = null;
@@ -148,7 +148,6 @@ public class FingerprintModule extends ReactContextBaseJavaModule {
         @Override
         public void onAuthenticationHelp(int helpCode, CharSequence helpString) {
             super.onAuthenticationHelp(helpCode, helpString);
-            Log.d("AUTHC", "[" + a_milli + "] onAuthenticationHelp " + helpCode + " " + helpString);
 
             WritableNativeMap writableNativeMap = new WritableNativeMap();
             writableNativeMap.putInt("code", helpCode);
@@ -161,7 +160,6 @@ public class FingerprintModule extends ReactContextBaseJavaModule {
         @Override
         public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
             super.onAuthenticationSucceeded(result);
-            Log.d("AUTHC", "[" + a_milli + "] onAuthenticationSucceeded");
             if(promise == null) {
                 throw new AssertionError("Tried to resolve the auth promise, but it was already resolved / rejected. This shouldn't happen.");
             }
@@ -172,7 +170,6 @@ public class FingerprintModule extends ReactContextBaseJavaModule {
         @Override
         public void onAuthenticationFailed() {
             super.onAuthenticationFailed();
-            Log.d("AUTHC", "[" + a_milli + "] onAuthenticationFailed");
 
             WritableNativeMap writableNativeMap = new WritableNativeMap();
             writableNativeMap.putInt("code", FINGERPRINT_ACQUIRED_AUTH_FAILED);

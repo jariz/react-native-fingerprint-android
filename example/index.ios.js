@@ -32,13 +32,13 @@ class example extends Component {
                     This version of the app only exists to check if iOS doesn't crash.
                 </Text>
                 <Text style={styles.instructions}>
-                    Hardware detected (should be false): {this.state.supported}
+                    Hardware detected (should be false): {'' + this.state.supported}
                 </Text>
                 <Text style={styles.instructions}>
-                    Has permission (should be false): {this.state.permission}
+                    Has permission (should be false): {'' + this.state.permission}
                 </Text>
                 <Text style={styles.instructions}>
-                    Is enrolled (should be false): {this.state.enrolled}
+                    Is enrolled (should be false): {'' + this.state.enrolled}
                 </Text>
             </View>
         );
@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     instructions: {
+        fontSize: 12,
         textAlign: 'center',
         color: '#333333',
         marginBottom: 5,

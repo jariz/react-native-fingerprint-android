@@ -13,7 +13,7 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-public class FingerprintModule extends ReactContextBaseJavaModule {
+public final class FingerprintModule extends ReactContextBaseJavaModule {
 
     private static final int FINGERPRINT_ACQUIRED_AUTH_FAILED = 999;
     private static boolean IS_CANCELED = false;
@@ -21,7 +21,7 @@ public class FingerprintModule extends ReactContextBaseJavaModule {
 
     private final FingerprintManagerCompat fpm;
 
-    public FingerprintModule(ReactApplicationContext rctx) {
+    public FingerprintModule(final ReactApplicationContext rctx) {
         super(rctx);
         fpm = FingerprintManagerCompat.from(rctx);
     }

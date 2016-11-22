@@ -64,10 +64,53 @@ public final class FingerprintModule extends ReactContextBaseJavaModule {
                     null,
                     0,
                     CANCELLATION_SIGNAL,
-                    new AuthenticationCallback(promise),
+                    new FingerprintManagerCompat.AuthenticationCallback() {
+                        @Override
+                        public final void onAuthenticationError(
+                                final int errorCode,
+                                final CharSequence errorString
+                        ) {
+                            super.onAuthenticationError(errorCode, errorString);
+                            IS_CANCELED = CANCELLATION_SIGNAL.isCanceled();
+                            promise.reject(Integer.toString(errorCode), errorString.toString());
+                        }
+
+                        @Override
+                        public final void onAuthenticationHelp(
+                                final int helpCode,
+                                final CharSequence helpString
+                        ) {
+                            super.onAuthenticationHelp(helpCode, helpString);
+                            final WritableNativeMap writableNativeMap = new WritableNativeMap();
+                            writableNativeMap.putInt("code", helpCode);
+                            writableNativeMap.putString("message", helpString.toString());
+                            FingerprintModule.this.getReactApplicationContext().getJSModule(
+                                    DeviceEventManagerModule.RCTDeviceEventEmitter.class
+                            ).emit("onFingerprintAuthenticationHelp", writableNativeMap);
+                        }
+
+                        @Override
+                        public final void onAuthenticationSucceeded(
+                                final FingerprintManagerCompat.AuthenticationResult result
+                        ) {
+                            super.onAuthenticationSucceeded(result);
+                            promise.resolve(null);
+                        }
+
+                        @Override
+                        public final void onAuthenticationFailed() {
+                            super.onAuthenticationFailed();
+                            final WritableNativeMap writableNativeMap = new WritableNativeMap();
+                            writableNativeMap.putInt("code", FINGERPRINT_ACQUIRED_AUTH_FAILED);
+                            writableNativeMap.putString("message", "Invalid fingerprint");
+                            FingerprintModule.this.getReactApplicationContext().getJSModule(
+                                    DeviceEventManagerModule.RCTDeviceEventEmitter.class
+                            ).emit("onFingerprintAuthenticationFailed", writableNativeMap);
+                        }
+                    },
                     null
             );
-        } catch (SecurityException ex) {
+        } catch (final SecurityException ex) {
             promise.reject(
                     new Exception(
                             "Ensure the USE_FINGERPRINT permission is specified in AndroidManifest.xml"
@@ -90,49 +133,5 @@ public final class FingerprintModule extends ReactContextBaseJavaModule {
             IS_CANCELED = CANCELLATION_SIGNAL.isCanceled();
         }
         promise.resolve(null);
-    }
-
-    private final class AuthenticationCallback extends FingerprintManagerCompat.AuthenticationCallback {
-
-        private final Promise promise;
-
-        private AuthenticationCallback(final Promise promise) {
-            this.promise = promise;
-        }
-
-        @Override
-        public final void onAuthenticationError(final int errorCode, final CharSequence errorString) {
-            super.onAuthenticationError(errorCode, errorString);
-            IS_CANCELED = CANCELLATION_SIGNAL.isCanceled();
-            promise.reject(Integer.toString(errorCode), errorString.toString());
-        }
-
-        @Override
-        public void onAuthenticationHelp(final int helpCode, final CharSequence helpString) {
-            super.onAuthenticationHelp(helpCode, helpString);
-            WritableNativeMap writableNativeMap = new WritableNativeMap();
-            writableNativeMap.putInt("code", helpCode);
-            writableNativeMap.putString("message", helpString.toString());
-            FingerprintModule.this.getReactApplicationContext().getJSModule(
-                    DeviceEventManagerModule.RCTDeviceEventEmitter.class
-            ).emit("onFingerprintAuthenticationHelp", writableNativeMap);
-        }
-
-        @Override
-        public final void onAuthenticationSucceeded(final FingerprintManagerCompat.AuthenticationResult result) {
-            super.onAuthenticationSucceeded(result);
-            promise.resolve(null);
-        }
-
-        @Override
-        public final void onAuthenticationFailed() {
-            super.onAuthenticationFailed();
-            WritableNativeMap writableNativeMap = new WritableNativeMap();
-            writableNativeMap.putInt("code", FINGERPRINT_ACQUIRED_AUTH_FAILED);
-            writableNativeMap.putString("message", "Invalid fingerprint");
-            FingerprintModule.this.getReactApplicationContext().getJSModule(
-                    DeviceEventManagerModule.RCTDeviceEventEmitter.class
-            ).emit("onFingerprintAuthenticationFailed", writableNativeMap);
-        }
     }
 }

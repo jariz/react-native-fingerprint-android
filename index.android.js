@@ -1,6 +1,6 @@
 
 import {NativeModules} from 'react-native'
-export default NativeModules.FingerprintAndroid
+module.exports = NativeModules.FingerprintAndroid
 
 ///* @flow */
 //

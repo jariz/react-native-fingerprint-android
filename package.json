@@ -1,6 +1,6 @@
 {
     "name": "react-native-fingerprint-android",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "Simple fingerprint authentication for Android",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"

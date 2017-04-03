@@ -1,4 +1,4 @@
-#react-native-fingerprint-android
+# react-native-fingerprint-android
 
 Full fingerprint authentication for react native (android only).
 
@@ -7,7 +7,7 @@ Full fingerprint authentication for react native (android only).
 _Pictured: the example project, located at `/example`_
 
 
-##Example  
+## Example  
 This is a simplified version. There are a few more concerns you should be aware of. [see 'Watch out!'](#watch-out)  
 For the full version, see the `example` directory.
 
@@ -39,18 +39,18 @@ import { ToastAndroid as Toast } from 'react-native';
 ```
 
 
-##API
+## API
 
 All functions & constants are static.
 
-####`.authenticate(warningCallback:?(response:FingerprintError) => {}):Promise<null>`  
+#### `.authenticate(warningCallback:?(response:FingerprintError) => {}):Promise<null>`  
 Starts authentication flow, with a optional callback for warning messages, instructing your user why authentication failed.  
 Returns a Promise.
-######Resolving
+###### Resolving
 Authentication was successful if this promise gets resolved.  
 There are no parameters.
   
-######Rejection
+###### Rejection
 Authentication has failed if the promise gets rejected.  
 Callback will receive a single parameter with the following structure: (example)  
 
@@ -74,7 +74,7 @@ This code will be match one of the following constants in the FingerprintAndroid
 
 _For more info on the constants, [see Android FingerprintManager docs](https://developer.android.com/reference/android/hardware/fingerprint/FingerprintManager.html)_
 
-######warningCallback
+###### warningCallback
 warningCallback is the only and optional parameter to `.authenticate()`.  
 If present, warningCallback gets called with a single parameter, a object with the following structure:  
 ```json
@@ -97,19 +97,19 @@ This code will be match one of the following constants in FingerprintAndroid:
 
 _For more info on the constants, [see Android FingerprintManager docs](https://developer.android.com/reference/android/hardware/fingerprint/FingerprintManager.html)_
 
-####`.isAuthenticationCanceled(): Promise<boolean>`
+#### `.isAuthenticationCanceled(): Promise<boolean>`
 Tells you whether or not authentication is running or not.
 
-####`.hasPermission(): Promise<boolean>`
+#### `.hasPermission(): Promise<boolean>`
 Will check if `android.permission.USE_FINGERPRINT` is granted to this app. (should always return true if you add the permission to your AndroidManifest...)
 
-####`hasEnrolledFingerprints(): Promise<boolean>`
+#### `hasEnrolledFingerprints(): Promise<boolean>`
 Determine if there is at least one fingerprint enrolled.  
 
-####`isHardwareDetected(): Promise<boolean>`
+#### `isHardwareDetected(): Promise<boolean>`
 Determine if fingerprint hardware is present and functional.
 
-##Watch out!
+## Watch out!
 React Native Fingerprint Android is mostly just a set of bindings to Android FingerprintManager.  
 Alas, _it's very low level_. You are still responsible for:
 
@@ -121,7 +121,7 @@ Alas, _it's very low level_. You are still responsible for:
 
 If you don't do any of the checks before calling `FingerprintAndroid.authenticate`, it will either **directly fail, or your app will contain security vulnerabilities.**
 
-##Installation
+## Installation
 `npm i react-native-fingerprint-android --save`
   
 Whether you're using the automatic installation method or not, don't forget to add the permission to your manifest:
@@ -135,11 +135,11 @@ Whether you're using the automatic installation method or not, don't forget to a
 +    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
  ```
 
-###Automatic installation (recommended)
+### Automatic installation (recommended)
 Run `react-native link` after npm install.
 That should be it.
 
-###Manual installation
+### Manual installation
 Same old, same old...
 
 `android/app/build.gradle`
@@ -171,6 +171,6 @@ include ':app'
         }
 ```
 
-##Todo
+## Todo
 - [ ] CryptoObject support     
 - [ ] [Samsung fingerprint SDK?](http://developer.samsung.com/galaxy/pass)

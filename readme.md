@@ -109,6 +109,9 @@ Determine if there is at least one fingerprint enrolled.
 #### `isHardwareDetected(): Promise<boolean>`
 Determine if fingerprint hardware is present and functional.
 
+#### `cancelAuthentication`
+Manually cancel the authentication, this is required to follow the design principles in [the design guidelines](https://material.google.com/patterns/fingerprint.html). When called this will trigger a rejection of the original authenticate promise.
+
 ## Watch out!
 React Native Fingerprint Android is mostly just a set of bindings to Android FingerprintManager.  
 Alas, _it's very low level_. You are still responsible for:

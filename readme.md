@@ -161,6 +161,12 @@ include ':app'
 
 `android/app/src/main/java/com.your.package/MainApplication.java`
 ```diff
+import java.util.Arrays;
+import java.util.List;
+
++import io.jari.fingerprint.FingerprintPackage;
+```
+```diff
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(

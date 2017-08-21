@@ -22,10 +22,9 @@ public class FingerprintPackage implements ReactPackage {
         modules.add(new FingerprintModule(reactApplicationContext));
         return modules;
     }
-
-    @Override
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return Collections.emptyList();
+    
+    public List<Class<? extends JavaScriptModule>> createJSModules() {		
+        return Collections.emptyList();		
     }
 
     @Override

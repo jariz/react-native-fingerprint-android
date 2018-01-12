@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.support.v4.os.CancellationSignal;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -144,7 +145,7 @@ public class FingerprintModule extends ReactContextBaseJavaModule {
                 isCancelled = true;
             }
             if(promise == null) {
-                throw new AssertionError("Tried to reject the auth promise, but it was already resolved / rejected. This shouldn't happen.");
+                Log.e("FingerprintModule", "Tried to reject the auth promise, but it was already resolved / rejected. This shouldn't happen.");
             }
             promise.reject(Integer.toString(errorCode), errString.toString());
             promise = null;
@@ -166,7 +167,7 @@ public class FingerprintModule extends ReactContextBaseJavaModule {
         public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result) {
             super.onAuthenticationSucceeded(result);
             if(promise == null) {
-                throw new AssertionError("Tried to resolve the auth promise, but it was already resolved / rejected. This shouldn't happen.");
+                Log.e("FingerprintModule", "Tried to resolve the auth promise, but it was already resolved / rejected. This shouldn't happen.");
             }
             promise.resolve(null);
             promise = null;

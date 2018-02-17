@@ -146,9 +146,10 @@ public class FingerprintModule extends ReactContextBaseJavaModule {
             }
             if(promise == null) {
                 Log.e("FingerprintModule", "Tried to reject the auth promise, but it was already resolved / rejected. This shouldn't happen.");
+            } else {
+                promise.reject(Integer.toString(errorCode), errString.toString());
+                promise = null;
             }
-            promise.reject(Integer.toString(errorCode), errString.toString());
-            promise = null;
         }
 
         @Override
@@ -168,9 +169,10 @@ public class FingerprintModule extends ReactContextBaseJavaModule {
             super.onAuthenticationSucceeded(result);
             if(promise == null) {
                 Log.e("FingerprintModule", "Tried to resolve the auth promise, but it was already resolved / rejected. This shouldn't happen.");
+            } else {
+                promise.resolve(null);
+                promise = null;
             }
-            promise.resolve(null);
-            promise = null;
         }
 
         @Override

@@ -119,7 +119,7 @@ Alas, _it's very low level_. You are still responsible for:
 - Making sure the device has fingerprints enrolled by calling `FingerprintAndroid.hasEnrolledFingerprints()` (if you don't check this before starting authentication, **any valid fingerprint will be accepted**)  
 - Making sure your app has proper permissions setup (see installation guide below)
 - Making sure device has supported hardware by calling `FingerprintAndroid.isHardwareDetected()` 
-- [Making sure you display the correct icon, as defined by the design guidelines.](https://material.google.com/patterns/fingerprint.html)
+- [Making sure you display the correct icon, as defined by the design guidelines.](https://material.io/design/platform-guidance/android-fingerprint.html#)
 - Restarting authentication if screen turns off. (see example project for on an example on how to do that)
 
 If you don't do any of the checks before calling `FingerprintAndroid.authenticate`, it will either **directly fail, or your app will contain security vulnerabilities.**

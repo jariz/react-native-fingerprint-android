@@ -33,7 +33,7 @@ class example extends Component {
     
     async componentWillUnmount() {
         try {
-            if(!Fingerprint.isAuthenticationCanceled()) {
+            if(!(await Fingerprint.isAuthenticationCanceled())) {
                 //stop listening to authentication.
                 await Fingerprint.cancelAuthentication();
             }

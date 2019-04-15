@@ -24,5 +24,12 @@
     "bugs": {
         "url": "https://github.com/jariz/react-native-fingerprint-android/issues"
     },
-    "homepage": "https://github.com/jariz/react-native-fingerprint-android#readme"
+    "homepage": "https://github.com/jariz/react-native-fingerprint-android#readme",
+    "files": [
+      "android/src",
+      "android/build.gradle"
+      "index.android.js",
+      "index.ios.js",
+      "index.js"
+    ]
 }
